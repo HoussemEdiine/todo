@@ -1,6 +1,12 @@
 .App {
+  
   text-align: center;
 }
+.list-group{
+  align-items: center;
+  width: 600px;
+  margin: auto;
+} 
 
 .App-logo {
   height: 40vmin;

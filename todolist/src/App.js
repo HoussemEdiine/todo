@@ -8,26 +8,29 @@ export default function App() {
   let [isInedit,setInedit]=useState(false)
   const onchange = e => {
     
-    setItem(e.target.value)
-  }
+      setItem(e.target.value)
+    }
+    
+  
   const add = () =>{
- 
+    if(item!==''&& item!==' '){
+
       setTask([...task,{
          id : task.length,
          task : item ,
          isInedit:false
       
       }])
+    }
       setItem('')
   
   }
   const del = (index) =>{
-    task= task.filter(el=>el.id!==index)
-   setTask(task)
+   setTask(task.filter(el=>el.id!==index))
       }
     const EditMode = (id) =>{
     setTask(task.map(element=>{
-      element.id = id ?  {...element,isInedit:!element.isInedit} : {...element}
+     return  element.id === id ?  {...element,isInedit:!element.isInedit} : {...element}
 
     })
     )
@@ -50,32 +53,30 @@ console.log(task)
   return (
     <div className="App">
       
-    
+         <h1>Todo List </h1>
     <input placeholder='add task' value={item} onChange={onchange}/>
-    <button onClick={add}>Add</button>
+    <button className='btn btn-primary' onClick={add} style={{marginLeft:'6px',marginBottom:'2px'}}>ADD</button>
     
         
-      
+    <ul className="list-group" style={{alignItems:'center'}} id='list'>
       {task.map(x =>   
         
-        <li key={x.id} onClick={()=>EditMode(x.id)} > 
+        <li key={x.id} className='list-group-item list-group-item-action' style={{marginTop:'1px',alignItems:'center1'}}>  
            
+           { !x.isInedit  ?
           
-            <span key={x.id}>  { !isInedit ? (x.task) :(<>
+            <span onClick={()=>EditMode(x.id)}> {x.task}</span> :(<React.Fragment>
              
              <input key={x.id} defaultValue={x.task}  onChange={editing}/>         
              <button onClick={()=>EditMode(x.id)}>X</button>
              <button onClick={()=>onEdit(x.id)}>oK</button>
-            </>)}</span>
-            <div>
-
-          <button onClick={()=>del(x.id)}>Sup</button>
-            </div>
-                   
-            
+            </React.Fragment>)}
+        
+          <img src='icons8-remove-48.png' onClick={()=>del(x.id)} style={{marginLeft:'60px'}}/>    
           </li>     
        
       )}
+      </ul>
     </div>
   );
 }
