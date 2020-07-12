@@ -36,17 +36,15 @@ export default function App() {
     )
     }
     const onEdit = (id) =>{
-    let newtask = [...task] 
-    let elementIndex = task.findIndex(element =>
-      element.id == id)
-      id = elementIndex
-    newtask.splice(elementIndex,1,{id,task:edit})
-   if(edit!==''){
-     setTask(newtask)
-   }
+    if(edit!==''){
+    setTask(task.map(element =>{
+      return  element.id === id ? {...element,task:edit,isInedit:false} : {...element,isInedit:false}
+    }
+
+    ))
+  }
     
-   setInedit(!isInedit)
-  
+   
       
     }
     const editing =(e) => {
