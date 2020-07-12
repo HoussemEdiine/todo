@@ -44,7 +44,7 @@ export default function App() {
     ))
   }
     
-   
+   setEdit('')
       
     }
     const editing =(e) => {
