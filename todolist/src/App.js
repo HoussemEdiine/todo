@@ -41,7 +41,10 @@ export default function App() {
       element.id == id)
       id = elementIndex
     newtask.splice(elementIndex,1,{id,task:edit})
-   setTask(newtask)
+   if(edit!==''){
+     setTask(newtask)
+   }
+    
    setInedit(!isInedit)
   
       
